@@ -1,6 +1,7 @@
 import React from 'react'
 import Layout from '../../components/Layout/Layout'
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
+import Input from '../../components/UI/Input/Input'
 const Register = () => {
   return (
     <div>
@@ -8,36 +9,45 @@ const Register = () => {
     <Container>
       <Row style={{marginTop:"50px"}}>
         <Col md={{span:6,offset:3}}>
-          <Form>
-             
+          <Form>   
            <Row>
            <Col md={6}>
-           <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>First Name</Form.Label>
-              <Form.Control type="text" placeholder="First Name" />
-              </Form.Group>
-              </Col>
+               
+           <Input
+           label='First Name'
+           placeholder=' enter first name'
+           type='text'
+           value=''
+           onChange={()=>{}}      
+           />
+            </Col>
             <Col md={6}>
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control type="text" placeholder="Last Name" />
-            </Form.Group>
+            <Input
+            label='Last Name'
+            placeholder='enter last name'
+            type='text'
+            value=''
+            onChange={()=>{}}      
+            />
            </Col>
            </Row>
 
 
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
+           <Input
+           label='Email'
+           placeholder='enter email'
+           type='email'
+           value=''
+           onChange={()=>{}}      
+           />
 
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
+           <Input
+           label='Password'
+           placeholder='enter password'
+           type='text'
+           value=''
+           onChange={()=>{}}      
+           />
 
             <Button variant="primary" type="submit">
               Submit

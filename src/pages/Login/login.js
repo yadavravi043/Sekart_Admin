@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import Layout from "../../components/Layout/Layout";
-
+import Input from "../../components/UI/Input/Input";
 const Login = () => {
   return (
     <>
@@ -10,19 +10,21 @@ const Login = () => {
           <Row style={{marginTop:"50px"}}>
             <Col md={{span:6,offset:3}}>
               <Form>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Email address</Form.Label>
-                  <Form.Control type="email" placeholder="Enter email" />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
-                </Form.Group>
+              <Input
+              label='Email'
+              placeholder='email'
+              type='email'
+              value='email'
+              onChange={()=>{}}      
+              />
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
-
+              <Input
+              label='Password'
+              placeholder='password'
+              type='text'
+              value='password'
+              onChange={()=>{}}      
+              />
                 <Button variant="primary" type="submit">
                   Submit
                 </Button>
