@@ -1,10 +1,11 @@
 import React from "react";
-import Layout from "./components/Layout/Layout";
+import RouteList from "./RouteList";
 function App() {
   return (
     <div className="App">
-       <Layout>
-       </Layout>
+       <>
+       <RouteList/>
+      </>
     </div>
   );
 }
