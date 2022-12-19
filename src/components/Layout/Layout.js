@@ -1,9 +1,10 @@
 import React from 'react'
 import Header from '../../components/Header/Header'
 const Layout = (props) => {
+  const user =localStorage.getItem('user')
   return (
     <div>
-        <Header/>
+         <Header/>
         {props.children}
     </div>
   )

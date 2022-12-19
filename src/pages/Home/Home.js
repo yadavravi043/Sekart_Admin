@@ -1,6 +1,8 @@
-import React,{useEffect} from 'react'
+import React,{Component, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import Layout from '../../components/Layout/Layout'
+import { Row,Col, Container } from 'react-bootstrap'
+import './home.css'
 import {useSelector} from 'react-redux'
 const Home = () => {
   const navigate=useNavigate()
@@ -14,7 +16,12 @@ const Home = () => {
   return (
     <div>
       <Layout>
-      <h1 style={{textAlign:"center" ,marginTop:"50px"}}>Welcome in Admin Dashboard</h1>
+      <Container fluid>
+      <Row>
+      <Col md={2} className='sidebar'>sidebar</Col>
+      <Col md={10}  style={{marginLeft:'auto'}}>container</Col>
+      </Row>
+      </Container>
       </Layout>
     </div>
   )

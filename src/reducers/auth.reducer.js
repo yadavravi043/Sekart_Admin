@@ -28,6 +28,11 @@ export const authReducer= (state=initialState,action)=>{
                     authenticating:false,
             }
             break;
+            case authConstant.LOGOUT_REQUEST:
+            state = {
+                ...initialState
+            }
+            break;
     }
     return state
 }
