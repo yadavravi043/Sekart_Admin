@@ -1,11 +1,18 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Navbar,Nav,Container} from 'react-bootstrap'
 import { NavLink,Link } from 'react-router-dom'
 const Header = () => {
+  //  const[user,setUser]=useState('')
+  //  useEffect(()=>{
+  //    if(localStorage.getItem('user')){
+  //     setUser(localStorage.getItem(JSON.stringyfy(user)))
+  //     console.log("user test",user)
+  //    }
+  //  },[user])
   return (
     <>
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-    <Container>
+    <Container fluid>
       <Link to="/" className='navbar-brand'>Admin Dashboard</Link>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
@@ -25,12 +32,14 @@ const Header = () => {
             </NavDropdown>*/}
         </Nav>
         <Nav>
-          <li className='nav-item'>
-          <NavLink to='/signin' className='nav-link'>signin</NavLink>
-          </li>
-          <li className='nav-item'>
-          <NavLink to='/signup' className='nav-link' >signup</NavLink>
-          </li>
+        <li className='nav-item'>
+        <NavLink to='/signin' className='nav-link'>signin</NavLink>
+        </li>
+        <li className='nav-item'>
+        <NavLink to='/signup' className='nav-link' >signup</NavLink>
+        </li>
+         
+      
         </Nav>
       </Navbar.Collapse>
     </Container>

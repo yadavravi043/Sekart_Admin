@@ -1,8 +1,23 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Layout from '../../components/Layout/Layout'
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import Input from '../../components/UI/Input/Input'
+import { useNavigate } from 'react-router-dom';
+import {useDispatch} from 'react-redux'
+import {useSelector} from 'react-redux'
 const Register = () => {
+  const navigate=useNavigate()
+   const dispatch=useDispatch()
+   const auth=useSelector(state=>state.auth)
+    // const[email,setEmail]=useState('')
+    // const[password,setPassword]=useState('')
+    // const[error,setError]=useState('')
+    const user=localStorage.getItem('user')
+    useEffect(()=>{
+      if(user){
+        navigate('/signin')
+      }
+    },[user])
   return (
     <div>
     <Layout>

@@ -3,6 +3,7 @@ import {BrowserRouter , Routes,Route} from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/login'
 import Register from './pages/Register/register'
+// import PrivateRoute from './components/HOC/privateRoute'
 const RouteList = () => {
   return (
     <div>
@@ -10,8 +11,7 @@ const RouteList = () => {
       <Routes>
       <Route path='/' exact element={<Home/>}/>
       <Route path='/signin' element={<Login/>}/>
-      <Route path='/signup' element={<Register/>}/>
-      
+      <Route path='/signup' element={<Register/>}/> 
       </Routes>
       </BrowserRouter>  
     </div>
