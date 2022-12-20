@@ -1,9 +1,9 @@
 import { authConstant } from "../constant/constant"
-import axiosInstance from "../helpers/axios"
+import axios from "../helpers/axios"
 export const login=(user)=>{
     return async (dispatch)=>{
         dispatch({type:authConstant.LOGIN_REQUEST})
-        const res= await axiosInstance.post(`/admin/signin`,{ ...user })
+        const res= await axios.post(`/admin/signin`,{ ...user })
         if(res.status===200){
             const {token,user}=res.data
             localStorage.setItem('token',token)
@@ -47,11 +47,22 @@ export const isUserLoggedIn = () => {
     }
 }
 
-export const signout=()=>{
-    return async dispatch=>{
-        localStorage.clear();
-        dispatch({
-            type:authConstant.LOGOUT_REQUEST
-        })
+export const signout = () => {
+    return async dispatch => {
+
+        dispatch({ type: authConstant.LOGOUT_REQUEST });
+        const res = await axios.post(`/admin/signout`);
+          console.log(res,"res")
+        if(res.status === 200){
+            localStorage.clear();
+            dispatch({ type: authConstant.LOGOUT_SUCCESS });
+        }else{
+            dispatch({
+                type: authConstant.LOGOUT_FAILURE,
+                payload: { error: res.data.error }
+            });
+        }
+
+        
     }
 }
