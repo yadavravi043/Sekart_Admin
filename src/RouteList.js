@@ -1,5 +1,6 @@
 import React from 'react'
 import {BrowserRouter , Routes,Route} from 'react-router-dom'
+import Category from './pages/category/category'
 import Home from './pages/Home/Home'
 import Login from './pages/Login/login'
 import Order from './pages/orders/order'
@@ -12,6 +13,7 @@ const RouteList = () => {
       <BrowserRouter>
       <Routes>
       <Route path='/' exact element={<Home/>}/>
+      <Route path='/category' exact element={<Category/>}/>
       <Route path='/signin' element={<Login/>}/>
       <Route path='/signup' element={<Register/>}/> 
       <Route path='/order' element={<Order/>}/> 

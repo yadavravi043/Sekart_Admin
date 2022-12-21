@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../../components/Header/Header'
 import { Container,Row,Col } from 'react-bootstrap'
 import { NavLink } from 'react-router-dom'
+import './layout.css'
 const Layout = (props) => {
   const user =localStorage.getItem('user')
   return (
@@ -20,6 +21,9 @@ const Layout = (props) => {
                 </li>
                 <li>
                   <NavLink to={"/order"}>order</NavLink>
+                </li>
+                <li>
+                  <NavLink to={"/category"}>category</NavLink>
                 </li>
               </ul>
             </Col>
