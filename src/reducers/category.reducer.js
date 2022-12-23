@@ -5,6 +5,50 @@ const initState = {
     loading: false,
     error: null
 };
+//categories->our old state categories
+//category-> new category which we want to push
+//this function add categories without refreshing page
+const buildNewCategories = (parentId, categories, category) => {
+    let myCategories = [];
+
+    if(parentId == undefined){
+        return [
+            ...categories,
+            {
+                _id: category._id,
+                name: category.name,
+                slug: category.slug,
+                children: []
+            }
+        ]
+    }
+    
+    for(let cat of categories){
+       //move on all catogories where parentid match add there 
+        if(cat._id == parentId){
+            myCategories.push({
+                ...cat,
+                children: cat.children ? buildNewCategories(parentId, [...cat.children,{ 
+                    _id: category._id,
+                    name: category.name,
+                    slug: category.slug,
+                    parentId: category.parentId,
+                    children: category.children
+            }],category):[]
+        })
+        }else{
+            myCategories.push({
+                ...cat,
+                children: cat.children ? buildNewCategories(parentId, cat.children, category) : []
+            });
+        }
+
+        
+    }
+
+
+    return myCategories;
+}
 export const categoryReducer=(state = initState, action) => {
     switch(action.type){
         case categoryConstansts.GET_ALL_CATEGORIES_SUCCESS:
@@ -21,12 +65,13 @@ export const categoryReducer=(state = initState, action) => {
             break;
         case categoryConstansts.ADD_NEW_CATEGORY_SUCCESS:
             const category = action.payload.category;
-            // const updatedCategories = buildNewCategories(category.parentId, state.categories, category);
-            // console.log('updated categoires', updatedCategories);
+            //pass new cat parentid ,all catogories,new catogory
+            const updatedCategories = buildNewCategories(category.parentId, state.categories, category);
+            console.log("updated cat",updatedCategories)
             
             state = {
                 ...state,
-                // categories: updatedCategories,
+                categories: updatedCategories,
                 loading: false,
             }
             break;

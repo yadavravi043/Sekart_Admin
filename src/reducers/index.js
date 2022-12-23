@@ -9,6 +9,6 @@ const rootReducer=combineReducers({
   user:userReducer,
   category:categoryReducer,
   // order:orderReducer,
-  // product:productReducer,
+  product:productReducer,
 })
 export default rootReducer
