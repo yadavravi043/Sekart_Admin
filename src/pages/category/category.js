@@ -6,9 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCategory, getAllCategory } from "../../actions";
 import Input from "../../components/UI/Input/Input";
 import Modal from "../../components/UI/model/model";
+import CheckboxTree from 'react-checkbox-tree';
+import 'react-checkbox-tree/lib/react-checkbox-tree.css';
+import {IoCheckboxOutline,IoCheckboxSharp,IoChevronForward,IoChevronDown } from "react-icons/io5";
+
 const Category = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [checked, setChecked] = useState([]);
+    const [expanded, setExpanded] = useState([]);
+    const [checkedArray, setCheckedArray] = useState([]);
+    const [expandedArray, setExpandedArray] = useState([]);
   const [show, setShow] = useState(false);
   const [categoryName, setCategoryName] = useState();
   const [categoryImage, setCategoryImage] = useState();
@@ -39,13 +47,20 @@ const Category = (props) => {
   const renderCategories = (categories) => {
     let myCategories = [];
     for (let category of categories) {
-      myCategories.push(
-        <li key={category.name}>
-          {category.name}
-          {category.children.length > 0 ? (
-            <ul>{renderCategories(category.children)}</ul>
-          ) : null}
-        </li>
+    
+        myCategories.push(
+          {
+              label: category.name,
+              value: category._id,
+              children: category.children.length > 0 && renderCategories(category.children)
+          }
+
+        // <li key={category.name}>
+        //   {category.name}
+        //   {category.children.length > 0 ? (
+        //     <ul>{renderCategories(category.children)}</ul>
+        //   ) : null}
+        // </li>
       );
     }
     return myCategories;
@@ -78,13 +93,29 @@ const Category = (props) => {
 
           <Row>
             <Col md={12}>
-              <ul>
-                {renderCategories(category.categories)}
-                {/*
+            {/*
+            <ul>
+              {renderCategories(category.categories)}
             
               {JSON.stringify(createCategoryList(category.categories))}
-            */}
               </ul>
+            */}
+
+            <CheckboxTree
+            nodes={renderCategories(category.categories)}
+            checked={checked}
+            expanded={expanded}
+            onCheck={checked => setChecked(checked )}
+            onExpand={expanded =>setExpanded(expanded )}
+            icons={{
+              uncheck: <IoCheckboxOutline/>,
+              check: <IoCheckboxSharp/>,
+              halfCheck: <IoCheckboxOutline />,
+              expandClose: <IoChevronForward />,
+              expandOpen: <IoChevronDown/>,
+              expandAll: <span className="rct-icon rct-icon-expand-all" />,
+            }}
+            />
             </Col>
           </Row>
         </Container>
