@@ -226,7 +226,6 @@ const Category = (props) => {
                   <select
                     className="form-control"
                     value={item.parentId}
-                    // onChange={(e) => setParentCategoryId(e.target.value)}
                     onChange={(e)=>handleCategoryInput('parentId',e.target.value,index,'expanded')}
                   >
                     <option>Select Category</option>
