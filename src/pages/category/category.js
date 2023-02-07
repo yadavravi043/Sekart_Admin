@@ -295,5 +295,4 @@ const Category = (props) => {
     </div>
   );
 };
-
 export default Category;
