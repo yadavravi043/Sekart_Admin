@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout/Layout";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addCategory, getAllCategory, updateCategories } from "../../actions";
+import { addCategory, getAllCategory, updateCategories , deleteCategories as deleteCategoriesAction} from "../../actions";
 import Input from "../../components/UI/Input/Input";
 import Modal from "../../components/UI/model/model";
 import CheckboxTree from "react-checkbox-tree";
@@ -91,6 +91,7 @@ const Category = (props) => {
   };
 
   const updateCategory = () => {
+    updateCheckedAndExpandedCategories()
     setUpdateCategoryModal(true);
     const categories = createCategoryList(category.categories);
     const checkedArray = [];
@@ -269,7 +270,78 @@ const Category = (props) => {
     </Modal>
     );
   }
+  const updateCheckedAndExpandedCategories = () => {
+    const categories = createCategoryList(category.categories);
+    const checkedArray = [];
+    const expandedArray = [];
+    checked.length > 0 && checked.forEach((categoryId, index) => {
+        const category = categories.find((category, _index) => categoryId == category.value);
+        category && checkedArray.push(category);
+    })
+    expanded.length > 0 && expanded.forEach((categoryId, index) => {
+        const category = categories.find((category, _index) => categoryId == category.value);
+        category && expandedArray.push(category);
+    })
+    setCheckedArray(checkedArray);
+    setExpandedArray(expandedArray);
+}
 
+const deleteCategory = () => {
+    updateCheckedAndExpandedCategories();
+    setDeleteCategoryModal(true);
+}
+
+const deleteCategories = () => {
+    const checkedIdsArray = checkedArray.map((item, index) => ({ _id: item.value }));
+    const expandedIdsArray = expandedArray.map((item, index) => ({ _id: item.value }));
+    const idsArray = expandedIdsArray.concat(checkedIdsArray);
+
+    if (checkedIdsArray.length > 0) {
+        dispatch(deleteCategoriesAction(checkedIdsArray))
+            .then(result => {
+                if (result) {
+                    dispatch(getAllCategory())
+                    setDeleteCategoryModal(true)
+                }
+            });
+    }
+
+    setDeleteCategoryModal(false);
+
+
+}
+
+const renderDeleteCategoryModal = () => {
+    return (
+        <Modal
+            modalTitle="Confirm"
+            show={deleteCategoryModal}
+            handleClose={() => setDeleteCategoryModal(false)}
+            buttons={[
+                {
+                    label: 'No',
+                    color: 'primary',
+                    onClick: () => {
+                        alert('no');
+                    }
+                },
+                {
+                    label: 'Yes',
+                    color: 'danger',
+                    onClick: deleteCategories
+                }
+            ]}
+        >
+
+
+            <h5>Expanded</h5>
+            { expandedArray.map((item, index) => <span key={index}>{item.name}</span>)}
+            <h5>Checked</h5>
+            { checkedArray.map((item, index) => <span key={index}>{item.name}</span>)}
+
+        </Modal>
+    );
+}
   
   return (
     <div>
@@ -313,7 +385,7 @@ const Category = (props) => {
           </Row>
           <Row>
             <Col>
-              <Button style={{ margin: "10px" }}>Delete</Button>
+              <Button onClick={deleteCategory} style={{ margin: "10px" }}>Delete</Button>
               <Button onClick={updateCategory}>Edit</Button>
             </Col>
           </Row>
@@ -321,6 +393,7 @@ const Category = (props) => {
     
        {renderAddCategoryModal()}
        {renderUpdateCategoriesModal()}
+       {renderDeleteCategoryModal()}
       </Layout>
     </div>
   );
