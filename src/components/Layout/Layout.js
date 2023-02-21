@@ -14,16 +14,19 @@ const Layout = (props) => {
             <Col md={2} className="sidebar">
               <ul>
                 <li>
-                  <NavLink to={"/"}>home</NavLink>
+                  <NavLink  to={"/"}>home</NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/product"}>product</NavLink>
+                <NavLink to={"/product"}>product</NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/order"}>order</NavLink>
+                <NavLink to={"/order"}>order</NavLink>
                 </li>
                 <li>
-                  <NavLink to={"/category"}>category</NavLink>
+                <NavLink to={"/category"}>category</NavLink>
+                </li>
+                <li>
+                  <NavLink to={"/page"}>Page</NavLink>
                 </li>
               </ul>
             </Col>

@@ -6,6 +6,7 @@ import Login from './pages/Login/login'
 import Order from './pages/orders/order'
 import Product from './pages/products/product'
 import Register from './pages/Register/register'
+import NewPage from './pages/newpage/newPage'
 // import PrivateRoute from './components/HOC/privateRoute'
 const RouteList = () => {
   return (
@@ -15,6 +16,7 @@ const RouteList = () => {
       <Route path='/' exact element={<Home/>}/>
       <Route path='/category' exact element={<Category/>}/>
       <Route path='/signin' element={<Login/>}/>
+      <Route path='/page' element={<NewPage/>}/>
       <Route path='/signup' element={<Register/>}/> 
       <Route path='/order' element={<Order/>}/> 
       <Route path='/product' element={<Product/>}/> 
