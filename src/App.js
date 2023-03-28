@@ -14,7 +14,9 @@ function App() {
   // }, []);
   useEffect(()=>{
     // dispatch(getAllCategory());
-    dispatch(getInitialData());
+    if (localStorage.getItem("user")) {
+           dispatch(getInitialData());
+          }
   },[])
 
   return (
